@@ -27,7 +27,7 @@ If you use it in an app that also targets Android, add the line: `compileSdkVers
 
 ## Usage
 
-*N.B. This only covers the usage of the actual widget. For more information about setting up your app after receiving the entitlement, go to https://developer.apple.com/support/reader-apps/*
+*Note: This only covers the usage of the actual widget. For more information about setting up your app after receiving the entitlement, go to https://developer.apple.com/support/reader-apps/*
 
 Use `ExternalLinkAccountText` to create a basic link (blue and underlined according to the design specifications). The link opens a modal sheet containg the required information before actually opening the link in an external app.
 

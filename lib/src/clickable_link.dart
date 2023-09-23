@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'theme.dart';
 
+/// A simple "classic" link widget (underlined, blue text) that is clickable.
 class ClickableLink extends StatelessWidget {
   /// A simple "classic" link widget (underlined, blue text) that is clickable.
   ///
@@ -40,6 +41,7 @@ class ClickableLink extends StatelessWidget {
   }
 }
 
+/// The base of a link widget (underlined, blue text) that is not clickable
 class LinkText extends StatelessWidget {
   /// The base of a link widget (underlined, blue text) that is not clickable
   const LinkText(this.text, {Key? key, this.textAlign = TextAlign.start})

@@ -2,6 +2,10 @@ name: external_link_account_modal
 description: An easy-to-use widget that complies with Apple's External Link Account requirements for reader apps
 version: 1.0.0
 homepage: https://github.com/ArvidNy/external_link_account_modal
+issue_tracker: https://github.com/ArvidNy/external_link_account_modal/issues
+screenshots:
+  - description: 'This image shows how a blue link opening a sheet modal with the required information for external links.'
+    path: preview.gif
 
 environment:
   sdk: ">=2.17.6 <3.0.0"
@@ -10,10 +14,10 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  plugin_platform_interface: ^2.0.2
-  url_launcher: ^6.1.5
-  devicelocale: ^0.5.4
-  device_info_plus: ^4.1.2
+  plugin_platform_interface: ^2.1.6
+  url_launcher: ^6.1.14
+  devicelocale: ^0.7.0
+  device_info_plus: ^9.0.3
 
 dev_dependencies:
   flutter_test:

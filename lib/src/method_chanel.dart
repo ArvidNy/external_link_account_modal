@@ -1,5 +1,6 @@
 import 'package:flutter/services.dart';
 
+/// The method channel for sending signals to the native code
 class ExternalLinkAccountModal {
   static const MethodChannel _channel = MethodChannel('can_make_payments');
 

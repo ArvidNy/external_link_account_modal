@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'clickable_link.dart';
 import 'modal.dart';
 
+/// A simple link that shows an in-app modal before leaving the app.
 class ExternalLinkAccountText extends StatelessWidget {
   /// Creates a simple link that shows an in-app modal before leaving the app.
   ///
