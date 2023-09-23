@@ -161,14 +161,11 @@ DeviceType currentDevice = DeviceType.iPhone;
 _setDevice() async {
   DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
   IosDeviceInfo iosInfo = await deviceInfo.iosInfo;
-  if (iosInfo.name == null) {
-    return DeviceType.values.byName(iosInfo.model ?? 'iPhone');
-  }
-  if (iosInfo.name!.contains('iPad')) {
+  if (iosInfo.name.contains('iPad')) {
     return DeviceType.iPad;
-  } else if (iosInfo.name!.contains('iPhone SE')) {
+  } else if (iosInfo.name.contains('iPhone SE')) {
     return DeviceType.iPhoneSe;
-  } else if (iosInfo.name!.contains('Plus') || iosInfo.name!.contains('Max')) {
+  } else if (iosInfo.name.contains('Plus') || iosInfo.name.contains('Max')) {
     return DeviceType.iPhoneMaxPlus;
   } else {
     return DeviceType.iPhone;
