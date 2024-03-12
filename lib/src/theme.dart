@@ -12,6 +12,9 @@ const systemBlue = Color(0xFF007AFF);
 /// The system blue color for dark theme, used for links and button text
 const systemBlueDark = Color(0xFF0A84FF);
 
+/// The system purple color for buttons
+const systemPurple = Color(0xFF8715c9);
+
 /// The system red color for light theme, never used
 const systemRed = Color(0xFFFF3B30);
 

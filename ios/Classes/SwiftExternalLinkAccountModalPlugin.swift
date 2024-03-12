@@ -11,7 +11,7 @@ public class SwiftExternalLinkAccountModalPlugin: NSObject, FlutterPlugin {
 
   public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
     switch (call.method) {
-      case"canMakePayments":
+      case"canOpenExternalAccount":
        if #available(iOS 16.0, *) {
             Task {
               result(await ExternalLinkAccount.canOpen);
@@ -20,7 +20,16 @@ public class SwiftExternalLinkAccountModalPlugin: NSObject, FlutterPlugin {
             result(SKPaymentQueue.canMakePayments());
           }
           break;
-      case"openNativeModal":
+    case"canOpenExternalPurchase":
+     if #available(iOS 17.4, *) {
+          Task {
+            result(await ExternalPurchaseLink.canOpen);
+          }
+        } else {
+          result(false);
+        }
+        break;
+      case"openNativeExternalAccountModal":
           if #available(iOS 16.0, *) {
             Task {
               do {
@@ -33,6 +42,21 @@ public class SwiftExternalLinkAccountModalPlugin: NSObject, FlutterPlugin {
           } else {
             result(false);
           }
+        break;
+    case"openNativePurchaseModal":
+        if #available(iOS 17.4, *) {
+             Task {
+                 do {
+                   try await ExternalPurchaseLink.open();
+                   result(true);
+                 } catch {
+                   result(false);
+                 }
+             }
+           } else {
+             result(false);
+        }
+
       default:
           result("Not Implemented!")
           break;

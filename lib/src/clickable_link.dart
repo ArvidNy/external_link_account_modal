@@ -1,4 +1,6 @@
-import 'package:flutter/material.dart';
+import 'dart:async';
+
+import 'package:flutter/cupertino.dart';
 
 import 'theme.dart';
 
@@ -16,11 +18,12 @@ class ClickableLink extends StatelessWidget {
       {Key? key,
       required this.text,
       required this.onTap,
-      this.textAlign = TextAlign.start})
+      this.textAlign = TextAlign.start,
+      this.linkStyle = LinkStyle.blueLink})
       : super(key: key);
 
   /// The text to be visible (i.e. the URL)
-  final String text;
+  final FutureOr<String?> text;
 
   /// The acction to be performed when the link is clicked
   final void Function() onTap;
@@ -28,39 +31,64 @@ class ClickableLink extends StatelessWidget {
   /// The link alignment
   final TextAlign textAlign;
 
+  /// The link style
+  final LinkStyle linkStyle;
+
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: LinkText(
-        text,
-        textAlign: textAlign,
-      ),
+    return CupertinoButton(
+      onPressed: onTap,
+      child: LinkText(text, textAlign: textAlign, linkStyle: linkStyle),
     );
   }
 }
 
 class LinkText extends StatelessWidget {
   /// The base of a link widget (underlined, blue text) that is not clickable
-  const LinkText(this.text, {Key? key, this.textAlign = TextAlign.start})
+  const LinkText(this.text,
+      {Key? key,
+      this.textAlign = TextAlign.start,
+      this.linkStyle = LinkStyle.blueLink})
       : super(key: key);
 
   /// The text to be visible (i.e. the URL)
-  final String text;
+  final FutureOr<String?> text;
 
   /// The link alignment
   final TextAlign textAlign;
 
+  /// The link style
+  final LinkStyle linkStyle;
+
   @override
   Widget build(BuildContext context) {
-    return Text(
-      text,
-      style: TextStyle(
-          color: MediaQuery.of(context).platformBrightness == Brightness.light
-              ? systemBlue
-              : systemBlueDark,
-          decoration: TextDecoration.underline),
-      textAlign: textAlign,
-    );
+    return FutureBuilder<String?>(
+        future: text is Future<String?>
+            ? text as Future<String?>
+            : Future.value(text),
+        builder: (context, snapshot) {
+          return Text.rich(
+            TextSpan(children: [
+              TextSpan(text: snapshot.data),
+              if (linkStyle == LinkStyle.iOSButton) const TextSpan(text: ' '),
+              if (linkStyle == LinkStyle.iOSButton)
+                WidgetSpan(
+                  child: Image.asset(
+                    'lib/img/link-out.png',
+                    height: 18,
+                    color: systemPurple,
+                    package: 'external_link_account_modal',
+                  ),
+                )
+            ]),
+            textAlign: textAlign,
+            style: TextStyle(
+              color:
+                  linkStyle == LinkStyle.iOSButton ? systemPurple : systemBlue,
+            ),
+          );
+        });
   }
 }
+
+enum LinkStyle { blueLink, iOSButton }
